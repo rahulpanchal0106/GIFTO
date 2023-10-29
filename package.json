@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cd server && npm run server",
+    "start": "cd server && npm run start",
     "install_client": "cd client && npm install",
     "install_server": "cd server && npm install",
-    "install": "concurrently \"npm run install_client\" \"npm run install_server\"",
+    "install": "npm run install_client && npm run install_server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
