@@ -15,19 +15,13 @@ GIFTO is a community engagement platform designed to connect residents and worke
 
 ## Setup
 
-1. Clone the repository:
+1. Paste the following block of code in terminal:
    ```
-    bash
-    git clone https://github.com/yourusername/gifto-portal.git
-    cd gifto-portal 
-   ```
-2. Install dependencies:
-    ```
+    git clone https://github.com/rahulpanchal0106/GIFTO.git
+    cd gifto
+    
     npm run install
    
-    ```
-3. Start the app:
-    ```
     npm run start
 
     ```
