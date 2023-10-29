@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logged In Home Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+        }
+
+        .content {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .event-list {
+            flex: 1;
+            text-align: left;
+            padding-right: 20px;
+        }
+
+        .event-item {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background-color: #fff;
+        }
+
+        .event-title {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .event-details {
+            font-size: 16px;
+            color: #666;
+        }
+
+        .map-section {
+            flex: 1;
+            height: 300px; /* Adjust height as needed */
+            background-color: #ccc; /* Placeholder color for map */
+            border-radius: 5px;
+        }
+
+        .button-container {
+            margin-top: 20px;
+        }
+
+        .button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <h1>Welcome, [User Name]</h1>
+    </div>
+    <div class="content">
+        <div class="event-list">
+            <div class="event-item">
+                <div class="event-title">Event 1</div>
+                <div class="event-details">Date: [Event Date]</div>
+                <div class="event-details">Location: [Event Location]</div>
+            </div>
+            <div class="event-item">
+                <div class="event-title">Event 2</div>
+                <div class="event-details">Date: [Event Date]</div>
+                <div class="event-details">Location: [Event Location]</div>
+            </div>
+            <!-- Add more event items as needed -->
+        </div>
+        <div class="map-section">
+            <!-- Placeholder for the map -->
+            <p>Map here</p>
+        </div>
+    </div>
+</body>
+</html>
