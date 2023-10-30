@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Logged In Home Page</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -91,9 +94,35 @@
             <!-- Add more event items as needed -->
         </div>
         <div class="map-section">
+            <div id="map" style="width: 600px; height: 400px;"></div>
+
             <!-- Placeholder for the map -->
-            <p>Map here</p>
+
         </div>
     </div>
 </body>
+<script>
+
+    var southWest = L.latLng(23.145, 72.660); // Southwestern corner of expanded area
+var northEast = L.latLng(23.185, 72.705); // Northeastern corner of expanded area
+var bounds = L.latLngBounds(southWest, northEast);
+
+var map = L.map('map', {
+    maxBounds: bounds,
+    maxBoundsViscosity: 0.9, // Adjust to your preference
+    maxZoom: 19, // Set the maximum zoom level (optional)
+    minZoom: 14 // Set the minimum zoom level for the full city view
+}).setView([23.163730, 72.681115], 14); // Set initial zoom level
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19
+}).addTo(map);
+
+var marker = L.marker([23.163730, 72.681115]).addTo(map);
+marker.bindPopup("<b>GIFT City</b><br>Welcome!").openPopup();
+
+
+
+    
+</script>
 </html>
