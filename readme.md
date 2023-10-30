@@ -15,7 +15,7 @@ GIFTO is a community engagement platform designed to connect residents and worke
 
 ## Setup
 
-1. Make sure you have git installed 
+1. Make sure you have [git](https://git-scm.com/downloads) installed 
 
 2. Paste the following block of code in terminal:
    ```
