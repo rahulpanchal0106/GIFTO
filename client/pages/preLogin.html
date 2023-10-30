@@ -3,65 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to GIFTO</title>
+    <title>GIFTO - Community Engagement Portal</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            text-align: center;
             margin: 0;
             padding: 0;
         }
 
-        .navbar {
-            background-color: #007bff;
-            color: #fff;
-            padding: 15px;
+        .header {
+            background-image: url('../img/cityscape.jpg'); /*Replace with actual image URL */
+            background-size: cover;
+            background-position: center;
+            color:#7c7c7c;
+            padding: 100px 0;
             text-align: center;
+            backdrop-filter: blur(10px);
         }
 
-        .content {
-            text-align: center;
-            padding: 50px;
-        }
-
-        h1 {
-            color: #333;
-        }
-
-        p {
-            color: #666;
-            font-size: 18px;
+        .header h1 {
+            font-size: 48px;
             margin-bottom: 20px;
         }
 
-        .button-container {
-            margin-top: 20px;
+        .header p {
+            font-size: 20px;
+            margin-bottom: 40px;
         }
 
-        .button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
+        .features {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            background-color: #f8f8f8;
+            padding: 60px 0;
+        }
+
+        .feature {
+            width: 30%;
+            padding: 20px;
+            margin: 20px;
+            background-color: #fff;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .feature img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 50%;
+            margin-bottom: 20px;
+        }
+
+        .feature h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
             font-size: 16px;
+        }
+
+        .cta {
+            background-color: #007bff;
+            padding: 60px 0;
+            color: #fff;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 40px;
+        }
+
+        .cta a {
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #007bff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
             margin-right: 10px;
         }
     </style>
 </head>
 <body>
-    <div class="navbar">
+
+    <div class="header">
         <h1>Welcome to GIFTO</h1>
+        <p>Your Gateway to a Connected and Empowered GIFT City</p>
     </div>
-    <div class="content">
-        <h1>Empowering Communities at GIFT City</h1>
-        <p>Connect with fellow residents and workers. Explore events and play an active role in shaping the city's future.</p>
-        <div class="button-container">
-            <a class="button" href="/login">Login</a>
-            <a class="button" href="/signup">Sign Up</a>
+
+    <div class="features">
+        <div class="feature">
+            <img src="residents.jpg" alt="Residents">
+            <h2>For Residents</h2>
+            <p>Stay updated on events, connect with neighbors, and contribute to shaping our city's future.</p>
+        </div>
+        <div class="feature">
+            <img src="workers.jpg" alt="Workers">
+            <h2>For Workers</h2>
+            <p>Explore professional opportunities, network with peers, and be an active part of GIFT City's growth.</p>
+        </div>
+        <div class="feature">
+            <img src="businesses.jpg" alt="Businesses">
+            <h2>For Businesses</h2>
+            <p>Promote your services, connect with customers, and be a key player in our local economy.</p>
         </div>
     </div>
+
+    <div class="cta">
+        <h2>Join Us in Shaping the Future of GIFT City!</h2>
+        <p>Get started now and be a part of the thriving community at GIFT City.</p>
+        <a href="/signup">Sign Up</a>
+        <a href="/login">Login</a>
+    </div>
+
 </body>
 </html>
