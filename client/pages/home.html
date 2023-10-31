@@ -8,6 +8,9 @@
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
 
     <style>
+        body::-webkit-scrollbar {
+            width: 0.1em;
+        }
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -16,7 +19,7 @@
         }
 
         .navbar {
-            background-color: #007bff;
+            background-color:#6c63ff;
             color: #fff;
             padding: 15px;
             text-align: center;
@@ -24,6 +27,7 @@
 
         .content {
             display: flex;
+            padding: 10px;
             align-items: flex-start;
         }
 
@@ -31,6 +35,8 @@
             flex: 1;
             text-align: left;
             padding-right: 20px;
+            width:30vw;
+            padding-left: 20px;
         }
 
         .event-item {
@@ -39,6 +45,7 @@
             margin-bottom: 10px;
             border-radius: 5px;
             background-color: #fff;
+            width:90%;
         }
 
         .event-title {
@@ -52,11 +59,13 @@
         }
 
         .map-section {
-            flex: 1;
-            height: 300px; /* Adjust height as needed */
+            flex: auto;
+            height: 85vh; /* Adjust height as needed */
             background-color: #ccc; /* Placeholder color for map */
             border-radius: 5px;
         }
+        
+
 
         .button-container {
             margin-top: 20px;
@@ -73,11 +82,152 @@
             font-size: 16px;
             margin-right: 10px;
         }
+        a {
+            text-decoration: none;
+          }
+          ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .landing-page header {
+            min-height: 80px;
+            display: flex;
+          }
+          @media (max-width: 767px) {
+            .landing-page header {
+              min-height: auto;
+              display: initial;
+            }
+          }
+          .landing-page header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .container {
+              flex-direction: column;
+              justify-content: center;
+            }
+          }
+          .landing-page header .logo {
+            color: #5d5d5d;
+            font-style: italic;
+            text-transform: uppercase;
+            font-size: 20px;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .logo {
+              margin-top: 20px;
+              margin-bottom: 20px;
+            }
+          }
+          .landing-page header .links {
+            display: flex;
+            align-items: center;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .links {
+              text-align: center;
+              gap: 10px;
+            }
+          }
+          .landing-page header .links li {
+            margin-left: 30px;
+            color: #5d5d5d;
+            cursor: pointer;
+            transition: .3s;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .links li {
+              margin-left: auto;
+            }
+          }
+          .landing-page header .links li:last-child {
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: #FFF;
+            background-color: #6c63ff;
+          }
+          .landing-page header .links li:not(:last-child):hover {
+            color: #6c63ff;
+          }
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          /* Small */
+          @media (min-width: 768px) {
+            .container {
+              width: 750px;
+            }
+          }
+          /* Medium */
+          @media (min-width: 992px) {
+            .container {
+              width: 970px;
+            }
+          }
+          /* Large */
+          @media (min-width: 1200px) {
+            .container {
+              width: 1170px;
+            }
+          }
+        .links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+        
+        .links li {
+            cursor: pointer;
+            color: #5d5d5d;
+            transition: .3s;
+        }
+        
+        .links li:last-child {
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: #FFF;
+            background-color: #6c63ff;
+        }
+        
+        .links li:not(:last-child):hover {
+            color: #6c63ff;
+        }
+        .logo {
+            color: #5d5d5d;
+            font-style: italic;
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 20px;
+        }
+        
+        @media (max-width: 767px) {
+            .logo {
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+        }
+                
     </style>
 </head>
 <body>
-    <div class="navbar">
-        <h1>Welcome, [User Name]</h1>
+    <div class="landing-page">
+        <header>
+            <div class="container">
+              <a href="#" class="logo">GIFTO <b style="font-size:0.6em">Gujarat International Finance Tec-City Outreach</b></a>
+              <ul class="links">
+                <li>My Profile</li>
+                <li>About Us</li>
+                <li>Home</li>
+              </ul>
+            </div>
+        </header>
     </div>
     <div class="content">
         <div class="event-list">
@@ -94,35 +244,54 @@
             <!-- Add more event items as needed -->
         </div>
         <div class="map-section">
-            <div id="map" style="width: 600px; height: 400px;"></div>
-
-            <!-- Placeholder for the map -->
-
+            <div id="map" style="width: 100%; height: 100%; border-radius:6px; margin-right:100px"></div>
         </div>
     </div>
 </body>
 <script>
 
     var southWest = L.latLng(23.145, 72.660); // Southwestern corner of expanded area
-var northEast = L.latLng(23.185, 72.705); // Northeastern corner of expanded area
-var bounds = L.latLngBounds(southWest, northEast);
+    var northEast = L.latLng(23.185, 72.705); // Northeastern corner of expanded area
+    var bounds = L.latLngBounds(southWest, northEast);
 
-var map = L.map('map', {
-    maxBounds: bounds,
-    maxBoundsViscosity: 0.9, // Adjust to your preference
-    maxZoom: 19, // Set the maximum zoom level (optional)
-    minZoom: 14 // Set the minimum zoom level for the full city view
-}).setView([23.163730, 72.681115], 14); // Set initial zoom level
+    var map = L.map('map', {
+        maxBounds: bounds,
+        maxBoundsViscosity: 0.9, // Adjust to your preference
+        maxZoom: 19, // Set the maximum zoom level (optional)
+        minZoom: 14 // Set the minimum zoom level for the full city view
+    }).setView([23.163730, 72.681115], 14); // Set initial zoom level
 
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19
-}).addTo(map);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
 
-var marker = L.marker([23.163730, 72.681115]).addTo(map);
-marker.bindPopup("<b>GIFT City</b><br>Welcome!").openPopup();
-
-
-
+    var marker=0;
     
+    
+   
+
+    // Make a request to Nominatim geocoding service
+    var address = "GIFT, Gujarat International Finance Tec-City, Gujarat"; // Your full address
+
+    // Make a request to Nominatim geocoding service
+    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length > 0) {
+          var location = data[0];
+          var latitude = location.lat;
+          var longitude = location.lon;
+          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+          marker = L.marker([latitude, longitude]).addTo(map);
+          marker.bindPopup(`<b>GIFT City</b><br>Welcomes to Event-1!<br>`).openPopup();
+        } else {
+          console.error('No results found');
+          marker = L.marker([23.163550800000003,72.68785923316112]).addTo(map);
+          marker.bindPopup(`<b>GIFT City</b><br>Welcome!<br> Nanimo`).openPopup();
+        }
+      })
+      .catch(error => console.error('Error:', error));
+
+
 </script>
 </html>

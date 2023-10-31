@@ -5,6 +5,157 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFTO - Community Engagement Portal</title>
     <style>
+        /* Start Global Rules */
+
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Open Sans', sans-serif;
+        }
+        a {
+            text-decoration: none;
+          }
+          ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+          }
+          .container {
+            padding-left: 15px;
+            padding-right: 15px;
+            margin-left: auto;
+            margin-right: auto;
+          }
+          /* Small */
+          @media (min-width: 768px) {
+            .container {
+              width: 750px;
+            }
+          }
+          /* Medium */
+          @media (min-width: 992px) {
+            .container {
+              width: 970px;
+            }
+          }
+          /* Large */
+          @media (min-width: 1200px) {
+            .container {
+              width: 1170px;
+            }
+          }
+          /* End Global Rules */
+
+          /* Start Landing Page */
+          .landing-page header {
+            min-height: 80px;
+            display: flex;
+          }
+          @media (max-width: 767px) {
+            .landing-page header {
+              min-height: auto;
+              display: initial;
+            }
+          }
+          .landing-page header .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .container {
+              flex-direction: column;
+              justify-content: center;
+            }
+          }
+          .landing-page header .logo {
+            color: #5d5d5d;
+            font-style: italic;
+            text-transform: uppercase;
+            font-size: 20px;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .logo {
+              margin-top: 20px;
+              margin-bottom: 20px;
+            }
+          }
+          .landing-page header .links {
+            display: flex;
+            align-items: center;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .links {
+              text-align: center;
+              gap: 10px;
+            }
+          }
+          .landing-page header .links li {
+            margin-left: 30px;
+            color: #5d5d5d;
+            cursor: pointer;
+            transition: .3s;
+          }
+          @media (max-width: 767px) {
+            .landing-page header .links li {
+              margin-left: auto;
+            }
+          }
+          .landing-page header .links li:last-child {
+            border-radius: 20px;
+            padding: 10px 20px;
+            color: #FFF;
+            background-color: #6c63ff;
+          }
+          .landing-page header .links li:not(:last-child):hover {
+            color: #6c63ff;
+          }
+          .landing-page .content .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 140px;
+            min-height: calc(100vh - 80px);
+          }
+          @media (max-width: 767px) {
+            .landing-page .content .container {
+              gap: 0;
+              min-height: calc(100vh - 101px);
+              justify-content: center;
+              flex-direction: column-reverse;
+            }
+          }
+          @media (max-width: 767px) {
+            .landing-page .content .info {
+              text-align: center;
+              margin-bottom: 15px 
+            }
+          }
+          .landing-page .content .info h1 {
+            color: #5d5d5d;
+            font-size: 44px;
+          }
+          .landing-page .content .info p {
+            margin: 0;
+            line-height: 1.6;
+            font-size: 15px;
+            color: #5d5d5d;
+          }
+          .landing-page .content .info button {
+            border: 0;
+            border-radius: 20px;
+            padding: 12px 30px;
+            margin-top: 30px;
+            cursor: pointer;
+            color: #FFF;
+            background-color: #6c63ff;
+          }
+          .landing-page .content .image img {
+            max-width: 100%;
+          }
+          /* End Landing Page */
+
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -13,10 +164,10 @@
         }
 
         .header {
-            background-image: url('../img/cityscape.jpg'); /*Replace with actual image URL */
+            background-image: url('../img/cityscape.jpg');
             background-size: cover;
             background-position: center;
-            color:#7c7c7c;
+            color: #fff; /* Changed text color to white */
             padding: 100px 0;
             text-align: center;
             backdrop-filter: blur(10px);
@@ -47,6 +198,7 @@
             background-color: #fff;
             border-radius: 10px;
             text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added a box shadow */
         }
 
         .feature img {
@@ -66,7 +218,7 @@
         }
 
         .cta {
-            background-color: #007bff;
+            background-color: #6c63ff;
             padding: 60px 0;
             color: #fff;
             text-align: center;
@@ -85,38 +237,235 @@
         .cta a {
             padding: 10px 20px;
             background-color: #fff;
-            color: #007bff;
+            color: #6c63ff;
             text-decoration: none;
             border-radius: 5px;
             font-size: 18px;
             margin-right: 10px;
         }
+        .about, .benefits, .how-it-works, .testimonial, .join-now {
+            text-align: left;
+            margin: 40px;
+        }
+
+        .about h2, .benefits h2, .how-it-works h2, .testimonial h2, .join-now h2 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .about p, .how-it-works p, .testimonial blockquote p, .join-now p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .benefits ul {
+            list-style-type: disc;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial blockquote {
+            font-size: 20px;
+            border-left: 4px solid #6c63ff; /* Added a border to the quote */
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .testimonial cite {
+            display: block;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .join-now a {
+            padding: 10px 20px;
+            background-color: #6c63ff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            margin-right: 10px;
+        }
+        .section {
+            margin: 40px;
+            padding: 40px;
+            background-color: #f8f8f8;
+            border-radius: 10px;
+        }
+
+        .section h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .section ul {
+            list-style-type: disc;
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .quote {
+            text-align: center;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        .quote blockquote {
+            display: inline-block;
+            font-size: 20px;
+            border-left: 4px solid #6c63ff;
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .quote cite {
+            display: block;
+            font-size: 18px;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        .stay-notified {
+            background-color: #6c63ff;
+            color: #fff;
+            text-align: center;
+            padding: 60px 0;
+            border-radius: 10px;
+        }
+
+        .stay-notified h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .stay-notified p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .stay-notified form {
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
+        .stay-notified input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .stay-notified button {
+            padding: 10px 20px;
+            background-color: #fff;
+            color: #6c63ff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 18px;
+            border: none;
+            cursor: pointer;
+        }
+        .benefits {
+            text-align: center;
+            margin: 50px 0;
+        }
+        
+        .benefits h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+            color: #6c63ff;
+        }
+        
+        .benefits ul {
+            list-style-type: none;
+            text-align: left;
+            margin-left: 30%;
+            padding: 0;
+        }
+        
+        .benefits li {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        
+        .benefits li::before {
+            content: "\2022"; /* Bullet character */
+            color: #6c63ff;
+            display: inline-block;
+            width: 1em;
+            margin-left: -1em;
+            font-size: 1.5em;
+        }
+        
+
+
     </style>
 </head>
 <body>
 
-    <div class="header">
-        <h1>Welcome to GIFTO</h1>
-        <p>Your Gateway to a Connected and Empowered GIFT City</p>
-    </div>
+          <!-- Start Landing Page -->
+          <div class="landing-page">
+            <header>
+              <div class="container">
+                <a href="#" class="logo">GIFTO <b style="font-size:0.6em">Gujarat International Finance Tec-City Outreach</b></a>
+                <ul class="links">
+                  <li>Home</li>
+                  <li>About Us</li>
+                  <li>Get Started</li>
+                </ul>
+              </div>
+            </header>
+            
+            <div class="content">
+              <div class="container">
+                <div class="info">
+                  <h1>Welcome to GIFTO</h1>
+                  <p>GIFTO is a community engagement platform designed to foster connections and empower individuals and businesses in GIFT City. Our mission is to create a thriving, inclusive, and forward-thinking community.</p>
+                  <button>Get Started</button>
+                </div>
+                <div class="image">
+                  <img src="https://i.postimg.cc/65QxYYzh/001234.png">
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End Landing Page -->
 
     <div class="features">
         <div class="feature">
-            <img src="residents.jpg" alt="Residents">
+            <!-- <img src="residents.jpg" alt="Residents"> -->
             <h2>For Residents</h2>
             <p>Stay updated on events, connect with neighbors, and contribute to shaping our city's future.</p>
         </div>
         <div class="feature">
-            <img src="workers.jpg" alt="Workers">
+            <!-- <img src="workers.jpg" alt="Workers"> -->
             <h2>For Workers</h2>
             <p>Explore professional opportunities, network with peers, and be an active part of GIFT City's growth.</p>
         </div>
         <div class="feature">
-            <img src="businesses.jpg" alt="Businesses">
+            <!-- <img src="businesses.jpg" alt="Businesses"> -->
             <h2>For Businesses</h2>
             <p>Promote your services, connect with customers, and be a key player in our local economy.</p>
         </div>
     </div>
+
+    <div class="benefits">
+        <h2>Benefits of Joining GIFTO</h2>
+        <ul>
+            <li>Access to exclusive events and workshops</li>
+            <li>Networking opportunities with fellow residents and professionals</li>
+            <li>Contribute to shaping the future of GIFT City through your ideas and feedback</li>
+            <li>Promote your business and services to a local audience</li>
+        </ul>
+    </div>
+
 
     <div class="cta">
         <h2>Join Us in Shaping the Future of GIFT City!</h2>
@@ -124,6 +473,9 @@
         <a href="/signup">Sign Up</a>
         <a href="/login">Login</a>
     </div>
+
+
+
 
 </body>
 </html>
