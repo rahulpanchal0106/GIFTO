@@ -27,8 +27,10 @@
 
         .content {
             display: flex;
+            flex-direction: row;
             padding: 10px;
-            align-items: flex-start;
+            align-items: start;
+            justify-content: center;
         }
 
         .event-list {
@@ -98,6 +100,18 @@
             .landing-page header {
               min-height: auto;
               display: initial;
+            }
+            .content{
+                flex-direction: column;
+
+            }
+            .content>.map-section{
+                width: 100%;
+
+            }
+            .content>.event-list{
+                width: 100%;
+                padding: 0px;
             }
           }
           .landing-page header .container {
