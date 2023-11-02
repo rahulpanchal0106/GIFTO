@@ -227,7 +227,10 @@
                 margin-bottom: 20px;
             }
         }
-                
+           
+        #addressField{
+          padding: 5px;
+        }
     </style>
 </head>
 <body>
@@ -285,8 +288,8 @@
    
 
     // Make a request to Nominatim geocoding service
-    var address = "GIFT, Gujarat International Finance Tec-City, Gujarat"; // Your full address
-
+    var address = "WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India ";
+    const addressFromAPI = '';
     // Make a request to Nominatim geocoding service
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
       .then(response => response.json())
@@ -297,7 +300,36 @@
           var longitude = location.lon;
           console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
           marker = L.marker([latitude, longitude]).addTo(map);
-          marker.bindPopup(`<b>GIFT City</b><br>Welcomes to Event-1!<br>`).openPopup();
+          const markdown=`
+            <b>Event details<b>
+              <br>
+              <div id="addressField"></div>
+              <button href='/eveDetails'>Show Event Details</button>
+            `
+          marker.bindPopup(markdown).openPopup();
+          function getLocation(){
+            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+  .then(response => response.json())
+  .then(data => {
+    if (data && data.display_name) {
+      console.log(data.display_name);
+      addressFromAPI = data.display_name;
+      
+    } else {
+      console.error('Invalid response data');
+    }
+  })
+  .catch(error => console.error('Error:', error));
+            //locationURL = ` https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
+            //fetch(locationURL)
+            //.then((res)=>{
+            //  res.json();
+            //})
+            //  .then((data)=>{
+            //    console.log("🐱‍🏍 data is here: ",  data)
+            //  })
+          }
+          getLocation();
         } else {
           console.error('No results found');
           marker = L.marker([23.163550800000003,72.68785923316112]).addTo(map);
@@ -306,6 +338,7 @@
       })
       .catch(error => console.error('Error:', error));
 
-
+      addressField = document.getElementById('addressField');
+      addressField.innerHTML=addressFromAPI;
 </script>
 </html>
