@@ -24,7 +24,9 @@
         .form-group {
             margin-bottom: 20px;
         }
-
+        #suAs{
+            display: none;
+        }
         .form-group label {
             font-weight: bold;
             display: block;
@@ -53,7 +55,7 @@
     <form class="signup-form" action="#" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
+            <input type="text" id="fullname" name="fullName" required>
         </div>
         <div class="form-group">
             <label for="mobile">Mobile Number:</label>
@@ -71,13 +73,72 @@
             <label for="company">Company Name:</label>
             <input type="text" id="company" name="company" required>
         </div>
+        <div class="form-group" id="suAs">
+            <label for="signUp_as">SignUp as:</label>
+            <!-- <input type="checkbox" id="signUp_as" name="signup_as" value="resident" checked> Resident -->
+            <input type="text" name="signup_as" value="worker">
+        </div>
         <div class="form-group">
             <label for="offerletter">Offer Letter (PDF):</label>
-            <input type="file" id="offerletter" name="offerletter" accept=".pdf" required>
+            <input type="file" id="offerletter" name="offerletter" accept=".pdf" >
         </div>
         <div class="form-group">
             <button type="submit">Signup</button>
         </div>
     </form>
 </body>
+<script>
+    document.querySelector('.signup-form').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        // Get form data
+        const formData = new FormData(this);
+        const postData = {};
+        formData.forEach((value, key) => {
+            postData[key] = value;
+        });
+
+        console.log(postData);
+
+        // Send a POST request using Fetch API
+        fetch('/resident_signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData)
+        })
+        .then((res) => {
+            if(res.status==400){
+                window.alert('User already exists');
+            }else if(res.status==201){
+                window.alert('registered successfull');
+                window.location.href='http://localhost:3000/home';
+            }else{
+                return window.alert('Something went wrong');
+            }
+            res.json()
+        })
+        .then(data => {
+            console.log('Data sent successfully:', data);
+            fetch('/home',{
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'auth':`Bearer ${token}`
+                    },
+                    method:'GET'
+                })
+                .then((res)=>{
+                    return res.text();
+                })
+                .then((data)=>{
+                    console.log(data);
+                    document.getElementById('body').innerHTML=data;
+                })
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+    });
+</script>
 </html>

@@ -57,13 +57,13 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
     <div class="login-container">
         <h2>Login</h2>
-        <form action="#" method="post">
+        <form action="#" method="post" class="loginForm" enctype="multipart/form-data">
             <div class="form-group">
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required>
+                <label for="username">Email:</label>
+                <input type="text" id="username" name="email" required>
             </div>
             <div class="form-group">
                 <label for="password">Password:</label>
@@ -75,4 +75,56 @@
         </form>
     </div>
 </body>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const token = urlParams.get('token');
+
+
+    
+    function loadHomePage() {
+        // Load the /home endpoint
+        redirect('/home')
+    }
+
+    document.querySelector('.loginForm').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        
+        // Get form data
+        const formData = new FormData(this);
+        const postData = {};
+        formData.forEach((value, key) => {
+            postData[key] = value;
+        });
+
+        console.log(postData);
+
+        // Send a POST request using Fetch API
+        fetch('/login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(postData)
+        })
+        .then((res) => {
+            console.log(res.status);
+            if(res.status==200){
+                window.alert('Login successful!');
+                const token = localStorage.getItem('jwtToken');
+                window.location.href = 'http://localhost:3000/home'
+            }
+            return res.json();
+        })
+        .then(data => {
+            console.log('Data from Server Response:', data);
+            window.alert(data.msg);
+        })
+        .catch(error => {
+            console.error('Error sending data:', error);
+        });
+
+        
+
+    });
+</script>
 </html>

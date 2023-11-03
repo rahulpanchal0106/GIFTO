@@ -17,7 +17,7 @@
             margin: 0;
             padding: 0;
         }
-
+        
         .navbar {
             background-color:#6c63ff;
             color: #fff;
@@ -65,6 +65,7 @@
             height: 85vh; /* Adjust height as needed */
             background-color: #ccc; /* Placeholder color for map */
             border-radius: 5px;
+            box-shadow: #66666666 0px 0px 30px;
         }
         
 
@@ -203,7 +204,7 @@
             transition: .3s;
         }
         
-        .links li:last-child {
+        .links li:last {
             border-radius: 20px;
             padding: 10px 20px;
             color: #FFF;
@@ -285,11 +286,11 @@
     var marker=0;
     
     
-   
+    
 
     // Make a request to Nominatim geocoding service
     var address = "WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India ";
-    const addressFromAPI = '';
+    var addressFromAPI = '';
     // Make a request to Nominatim geocoding service
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
       .then(response => response.json())
@@ -309,25 +310,19 @@
           marker.bindPopup(markdown).openPopup();
           function getLocation(){
             fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-  .then(response => response.json())
-  .then(data => {
-    if (data && data.display_name) {
-      console.log(data.display_name);
-      addressFromAPI = data.display_name;
+              .then((res) => {
+                res.json()
+              })
+              .then(data => {
+                if (data && data.display_name) {
+                  console.log(data.display_name);
+                  addressFromAPI = data.display_name;
       
-    } else {
-      console.error('Invalid response data');
-    }
-  })
-  .catch(error => console.error('Error:', error));
-            //locationURL = ` https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`
-            //fetch(locationURL)
-            //.then((res)=>{
-            //  res.json();
-            //})
-            //  .then((data)=>{
-            //    console.log("🐱‍🏍 data is here: ",  data)
-            //  })
+                } else {
+                  console.error('Invalid response data');
+              } 
+            })
+              .catch(error => console.error('Error:', error));
           }
           getLocation();
         } else {
@@ -340,5 +335,12 @@
 
       addressField = document.getElementById('addressField');
       addressField.innerHTML=addressFromAPI;
+
+
+
+
+
+
+      
 </script>
 </html>

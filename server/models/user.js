@@ -17,10 +17,17 @@ const schema = mongoose.Schema({
         type:String,
         required:true
     },
+    signup_as:{
+        type:String,
+        required:true
+    },
     address:{
         type:String,
-        required:true,
-        unique:true
+        unique:false
+    },
+    company:{
+        type:String,
+        unique:false
     }
 })
 

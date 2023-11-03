@@ -11,6 +11,12 @@
             margin: 100px;
         }
 
+        input[type="checkbox"][disabled] {
+            opacity: 0.5; /* Adjust the opacity to make it visually disabled */
+            cursor: not-allowed; /* Show a not-allowed cursor on hover */
+          }
+          
+
         h2 {
             margin-bottom: 30px;
         }
@@ -30,6 +36,9 @@
             display: block;
             margin-bottom: 5px;
         }
+        #suAs{
+            display: none;
+        }
 
         .form-group input {
             width: 100%;
@@ -48,12 +57,12 @@
         }
     </style>
 </head>
-<body>
+<body id="body">
     <h2>Resident Signup</h2>
     <form class="signup-form" action="#" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fullname">Full Name:</label>
-            <input type="text" id="fullname" name="fullname" required>
+            <input type="text" id="fullname" name="fullName" required>
         </div>
         <div class="form-group">
             <label for="mobile">Mobile Number:</label>
@@ -67,17 +76,84 @@
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" required>
         </div>
+        
+        <div class="form-group" id="suAs">
+            <label for="signUp_as">SignUp as:</label>
+            <!-- <input type="checkbox" id="signUp_as" name="signup_as" value="resident" checked> Resident -->
+            <input type="text" name="signup_as" value="resident">
+        </div>
+
         <div class="form-group">
             <label for="address">Address:</label>
             <textarea id="address" name="address" rows="4" required></textarea>
         </div>
+        
         <div class="form-group">
             <label for="aadhar">Aadhar Card (PDF):</label>
-            <input type="file" id="aadhar" name="aadhar" accept=".pdf" required>
+            <input type="file" id="aadhar" name="aadhar" accept=".pdf" >
         </div>
         <div class="form-group">
             <button type="submit">Signup</button>
         </div>
     </form>
 </body>
+<script>
+
+
+    document.querySelector('.signup-form').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            
+            // Get form data
+            const formData = new FormData(this);
+            const postData = {};
+            formData.forEach((value, key) => {
+                postData[key] = value;
+            });
+
+            console.log(postData);
+
+            // Send a POST request using Fetch API
+            fetch('/resident_signup', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(postData)
+            })
+            .then((res)=>{
+                if(res.status==400){
+                    window.alert('User already exists');
+                }else if(res.status==201){
+                    window.alert('Registration Successful');
+                    
+                }else{
+                    window.alert('Something went wrong');
+                }
+                return res.json();
+            })
+            .then((data) => {
+                console.log('Data sent successfully:',data);
+                const token = data.token;
+                //window.location.href='http://localhost:3000/home'
+                //localStorage.setItem('jwtToken', token);
+                //fetch('/home',{
+                //    headers: {
+                //        'Content-Type': 'application/json',
+                //        'auth':`Bearer ${token}`
+                //    },
+                //    method:'GET'
+                //})
+                //.then((res)=>{
+                //    return res.text();
+                //})
+                //.then((data)=>{
+                //    console.log(data);
+                //    document.getElementById('body').innerHTML=data;
+                //})
+            })
+            .catch(error => {
+                console.error('Error sending data:', error);
+            });
+        });
+</script>
 </html>
