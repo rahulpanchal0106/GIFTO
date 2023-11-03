@@ -1,0 +1,41 @@
+const express = require('express');
+const bodyParser = require('body-parser');
+const mongoose = require('mongoose');
+
+const app = express();
+const port = 3000;
+
+app.use(bodyParser.json());
+
+// Connect to your MongoDB database
+mongoose.connect('mongodb://localhost/your_database_name', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+});
+const db = mongoose.connection;
+
+const dataSchema = new mongoose.Schema({
+    content: String,
+});
+const Data = mongoose.model('Data', dataSchema);
+
+app.post('/home', async (req, res) => {
+    try {
+        const newData = new Data({
+            content: req.body.content,
+        });
+
+        await newData.save();
+
+        res.status(201).json({ message: 'Data saved successfully' });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: 'Failed to save data' });
+    }
+});
+
+app.use(express.static('public'));
+
+app.listen(port, () => {
+    console.log(`Server is listening on port ${port}`);
+});
