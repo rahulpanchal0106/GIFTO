@@ -32,7 +32,6 @@
             align-items: start;
             justify-content: center;
         }
-        
         .event-list::-webkit-scrollbar{
           display: none;
         }
@@ -67,13 +66,14 @@
 
         .map-section {
             flex: auto;
-            height: 83vh; /* Adjust height as needed */
-            background-color: #ccc; /* Placeholder color for map */
+            height: 83vh;
+            background-color: #ccc; 
             border-radius: 5px;
             box-shadow: #66666666 0px 0px 30px;
+            z-index: 1;
         }
         
-
+        
 
         .button-container {
             margin-top: 20px;
@@ -263,8 +263,22 @@
         display: block;
         margin-bottom: 5px;
     }
+    #eventDetailsForm::-webkit-scrollbar{
+      display: none;
+    }
     #eventDetailsForm{
       display: none;
+      position: absolute;
+      background-color: #f4f4f45c;
+      width: 50%;
+      overflow: scroll;
+      max-height: 60vh;
+      padding: 20px;
+      padding-right: 30px;
+      backdrop-filter: blur(10px);
+      box-shadow: #66666666 0px 0px 30px;
+      border-radius: 10px;
+      z-index: 30;
     }
     </style>
 </head>
@@ -284,30 +298,33 @@
     <div class="content">
         <div class="event-list">
           <button id="createEventButton" class="button">Create Event</button>
-          <form action="" method="post" id="eventDetailsForm">
+          <form action="#" method="post" id="eventDetailsForm">
               <div class="form-group">
                 <label for="eventName">Event Name:</label>
-                <input type="text" id="eventName" name="eventName" required>
+                <input type="text" id="eventName" name="eventName" value="Diwali Celebration" required>
               </div>
               <div class="form-group">
                   <label for="eventDate">Event Date:</label>
-                  <input type="date" id="eventDate" name="date" required>
+                  <input type="date" id="eventDate" name="eventDate" value="23-11-2023" required>
               </div>
               <div class="form-group">
                   <label for="eventTime">Event Time:</label>
-                  <input type="time" id="eventTime" name="time" required>
+                  <input type="time" id="eventTime" name="eventTime" value="21:00" required>
               </div>
               <div class="form-group">
                 <label for="address">Address:</label>
-                <textarea id="address" name="address" rows="4" required></textarea>
+                <textarea id="address" name="address" rows="4" required>WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India</textarea>
               </div>
               <div class="form-group">
                   <label for="details">Event Details:</label>
-                  <textarea id="address" name="address" rows="4" required></textarea>
+                  <textarea id="details" name="details" rows="4" required>Let's celebrate this diwali togather, and have a lot of fun </textarea>
+              </div>
+              <div class="form-group">
+                <button type="submit" id="postEventBtn">Post Event</button>
               </div>
 
           </form>
-            <div class="event-item">
+            <!-- <div class="event-item">
                 <div class="event-title">Event 1</div>
                 <div class="event-details">Date: [Event Date]</div>
                 <div class="event-details">Location: [Event Location]</div>
@@ -316,7 +333,7 @@
                 <div class="event-title">Event 2</div>
                 <div class="event-details">Date: [Event Date]</div>
                 <div class="event-details">Location: [Event Location]</div>
-            </div>
+            </div> -->
         </div>
         <div class="map-section">
             <div id="map" style="width: 100%; height: 100%; border-radius:6px; margin-right:100px"></div>
@@ -327,16 +344,16 @@
 </body>
 <script>
 
-    var southWest = L.latLng(23.145, 72.660); // Southwestern corner of expanded area
-    var northEast = L.latLng(23.185, 72.705); // Northeastern corner of expanded area
+    var southWest = L.latLng(23.145, 72.660);
+    var northEast = L.latLng(23.185, 72.705); 
     var bounds = L.latLngBounds(southWest, northEast);
 
     var map = L.map('map', {
         maxBounds: bounds,
-        maxBoundsViscosity: 0.9, // Adjust to your preference
-        maxZoom: 19, // Set the maximum zoom level (optional)
-        minZoom: 14 // Set the minimum zoom level for the full city view
-    }).setView([23.163730, 72.681115], 14); // Set initial zoom level
+        maxBoundsViscosity: 0.9, 
+        maxZoom: 19, 
+        minZoom: 14 
+    }).setView([23.163730, 72.681115], 14); 
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         maxZoom: 19
@@ -346,51 +363,7 @@
     
     
 
-    var address = "WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India ";
-    fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
-      .then(response => response.json())
-      .then(data => {
-        if (data.length > 0) {
-          var location = data[0];
-          var latitude = location.lat;
-          var longitude = location.lon;
-          console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
-          marker = L.marker([latitude, longitude]).addTo(map);
-          const markdown=`
-            <b>Event details<b>
-              <br>
-              <div id="addressField">${address}</div>
-              <button id="event_details">Show Event Details</button>
-            `
-          marker.bindPopup(markdown);
-          function getLocation(){
-            fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
-              .then((res) => {
-                return res.json()
-              })
-              .then(data => {
-                if (data && data.display_name) {
-                  console.log(data.display_name);
-                  addressFromAPI = data.display_name;
-                  
-                  const title = 'Event Title 🫠'; 
-                  const date = 'Event Date booo';  
-                  addEventToList(title, date, addressFromAPI);
-
-                } else {
-                  console.error('Invalid response data');
-              } 
-            })
-              .catch(error => console.error('Error:', error));
-          }
-          getLocation();
-        } else {
-          console.error('No results found');
-          marker = L.marker([23.163550800000003,72.68785923316112]).addTo(map);
-          marker.bindPopup(`<b>GIFT City</b><br>Welcome!`).openPopup();
-        }
-      })
-      .catch(error => console.error('Error:', error));
+    //var address = "WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India ";
 
 
       function addEventToList(title, date, location) {
@@ -405,12 +378,142 @@
         eventList.appendChild(eventItem);
       }
       
-      document.getElementById('createEventButton').addEventListener('click',(event)=>{
+      document.getElementById('createEventButton').addEventListener('click', function() {
+    
+        var form = document.getElementById('eventDetailsForm');
+        if (form.style.display === 'none') {
+          form.style.display = 'block';
+      } else {
+          form.style.display = 'none';
+      }
+      });
+
+      document.getElementById('eventDetailsForm').addEventListener('submit', function(event) {
+
         event.preventDefault();
-        document.getElementById('eventDetailsForm').style.display='flex';
+
+        const formData = new FormData(this);
+        const postData = {};
+        formData.forEach((value, key) => {
+            postData[key] = value;
+            console.log(formData);
+        });
+        console.log(formData);
+        fetch('/home',{
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(postData)
+        })
+        .then((res)=>{
+          console.log("🛸🛸",res.status);
+          return res.json();
+        })
+        .then((data)=>{
+          console.log(data);
+          window.alert(data.msg);
+
+          const eventData = {
+            eventName:data.event.eventName,
+            eventDate:data.event.eventDate,
+            eventTime:data.event.eventTime,
+            address:data.event.address,
+            details:data.event.details,
+        }
+
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(eventData.address)}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.length > 0) {
+            var location = data[0];
+            var latitude = location.lat;
+            var longitude = location.lon;
+            console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+            marker = L.marker([latitude, longitude]).addTo(map);
+            const markdown=`
+            <b>${title}</b><br>
+            Date: ${date}<br>
+            Address: ${address}
+          `;
+            marker.bindPopup(markdown);
+            function getLocation(){
+              fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
+                .then((res) => {
+                  return res.json()
+                })
+                .then(data => {
+                  if (data && data.display_name) {
+                    console.log(data.display_name);
+                    addressFromAPI = data.display_name;
+                    
+                    const title = eventData.eventName; 
+                    const date = eventData.eventDate;  
+                    addEventToList(title, date, addressFromAPI);
+  
+                  } else {
+                    console.error('Invalid response data');
+                } 
+              })
+                .catch(error => console.error('Error:', error));
+            }
+            getLocation();
+          } else {
+            console.error('No results found');
+            marker = L.marker([23.163550800000003,72.68785923316112]).addTo(map);
+            marker.bindPopup(`<b>GIFT City</b><br>Error fetching this address`).openPopup();
+          }
+        })
+        .catch(error => console.error('Error:', error));
+        })
+        .catch((err)=>{
+          window.alert(err);
+        })
       })
-
-
+      
+      async function loadEvents() {
+        try {
+          const response = await fetch('/allEvents');
+          if (!response.ok) {
+            console.log(response.status);
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const eventData = await response.json();
+      
+          eventData.events.forEach(event => {
+            const title = event.eventName;
+            const date = event.eventDate;
+            const address = event.address;
+            addEventToList(title, date, address);
+          });
+          
+          if (eventData.events.length === 0) {
+            const noEventsMessage = document.createElement('div');
+            noEventsMessage.classList.add('event-item');
+            noEventsMessage.innerText = 'No events';
+            eventList.appendChild(noEventsMessage);
+          }
+          eventData.markers.forEach(markerData => {
+            const { title, date, address, latitude, longitude } = markerData;
+      
+            const marker = L.marker([latitude, longitude]).addTo(map);
+      
+            const popupContent = `
+              <b>${title}</b><br>
+              Date: ${date}<br>
+              Address: ${address}
+            `;
+      
+            marker.bindPopup(popupContent);
+          });
+        } catch (error) {
+          console.error('Error fetching events:', error);
+        }
+      }
+      
+      document.addEventListener('DOMContentLoaded', loadEvents);
+      
+      
       
 </script>
 </html>

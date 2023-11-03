@@ -1,12 +1,29 @@
 const mongoose = require('mongoose');
 
 const homeSchema = mongoose.Schema({
-    userId:{
-        type:mongoose.Schema.Types.ObjectId,
-        ref:'user',
+    // userId:{
+    //     type:mongoose.Schema.Types.ObjectId,
+    //     ref:'user',
+    //     required:true
+    // },
+    eventName:{
+        type:String,
+        required:false,
+        unique:true
+    },
+    eventDate:{
+        type:String,
         required:true
     },
-    event:{
+    eventTime:{
+        type:String,
+        required:true
+    },
+    address:{
+        type:String,
+        required:true
+    },
+    details:{
         type:String,
         required:false
     }

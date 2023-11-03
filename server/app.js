@@ -17,9 +17,11 @@ const {
     signup
 } = require('./controllers/signup.controller');
 const {
-    homePage
+    homePage, 
+    createEvent
 } = require('./controllers/home.controller');
 const auth = require('./middlewares/auth');
+const getEvents = require('./controllers/allEvents.controller');
 
 app.use(express.json());
 app.use(morgan('dev'))
@@ -36,6 +38,9 @@ app.post('/resident_signup',signup);
 app.post('/login',loginVer);
 
 app.get('/home',homePage); //removed auth middleware
+app.post('/home',createEvent); //removed auth middleware
+
+app.get('/allEvents',getEvents);
 
 
 module.exports = app;

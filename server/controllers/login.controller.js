@@ -19,7 +19,7 @@ const loginVer = async (req,res)=>{
         }
 
         const token = jwt.sign({email:existingUser.email,id:existingUser._id},SECRET_KEY)
-        res.status(200).json({user:existingUser,token:token});
+        res.status(200).json({user:existingUser,token:token,msg:`You are logged in!`});
 
 
     }catch(err){
