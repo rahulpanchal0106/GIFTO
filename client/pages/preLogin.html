@@ -4,409 +4,431 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GIFTO - Community Engagement Portal</title>
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <style>
-        /* Start Global Rules */
+      /* Start Global Rules */
 
-        * {
-            box-sizing: border-box;
-        }
-        body {
-            font-family: 'Open Sans', sans-serif;
-        }
-        a {
-            text-decoration: none;
-          }
-          ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-          }
-          .container {
-            padding-left: 15px;
-            padding-right: 15px;
-            margin-left: auto;
-            margin-right: auto;
-          }
-          /* Small */
-          @media (min-width: 768px) {
-            .container {
-              width: 750px;
-            }
-          }
-          /* Medium */
-          @media (min-width: 992px) {
-            .container {
-              width: 970px;
-            }
-          }
-          /* Large */
-          @media (min-width: 1200px) {
-            .container {
-              width: 1170px;
-            }
-          }
-          /* End Global Rules */
+* {
+  box-sizing: border-box;
+}
+body {
+  font-family: "Open Sans", sans-serif;
+}
+a {
+  text-decoration: none;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+/* Small */
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+/* Medium */
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+/* Large */
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
+  }
+}
+/* End Global Rules */
 
-          /* Start Landing Page */
-          .landing-page header {
-            min-height: 80px;
-            display: flex;
-          }
-          @media (max-width: 767px) {
-            .landing-page header {
-              min-height: auto;
-              display: initial;
-            }
-          }
-          .landing-page header .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-          }
-          @media (max-width: 767px) {
-            .landing-page header .container {
-              flex-direction: column;
-              justify-content: center;
-            }
-          }
-          .landing-page header .logo {
-            color: #5d5d5d;
-            font-style: italic;
-            text-transform: uppercase;
-            font-size: 20px;
-          }
-          @media (max-width: 767px) {
-            .landing-page header .logo {
-              margin-top: 20px;
-              margin-bottom: 20px;
-            }
-          }
-          .landing-page header .links {
-            display: flex;
-            align-items: center;
-          }
-          @media (max-width: 767px) {
-            .landing-page header .links {
-              text-align: center;
-              gap: 10px;
-            }
-          }
-          .landing-page header .links li {
-            margin-left: 30px;
-            color: #5d5d5d;
-            cursor: pointer;
-            transition: .3s;
-          }
-          @media (max-width: 767px) {
-            .landing-page header .links li {
-              margin-left: auto;
-            }
-          }
-          .landing-page header .links li:last-child {
-            border-radius: 20px;
-            padding: 10px 20px;
-            color: #FFF;
-            background-color: #6c63ff;
-          }
-          .landing-page header .links li:not(:last-child):hover {
-            color: #6c63ff;
-          }
-          .landing-page .content .container {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 140px;
-            min-height: calc(100vh - 80px);
-          }
-          @media (max-width: 767px) {
-            .landing-page .content .container {
-              gap: 0;
-              min-height: calc(100vh - 101px);
-              justify-content: center;
-              flex-direction: column-reverse;
-            }
-          }
-          @media (max-width: 767px) {
-            .landing-page .content .info {
-              text-align: center;
-              margin-bottom: 15px 
-            }
-          }
-          .landing-page .content .info h1 {
-            color: #5d5d5d;
-            font-size: 44px;
-          }
-          .landing-page .content .info p {
-            margin: 0;
-            line-height: 1.6;
-            font-size: 15px;
-            color: #5d5d5d;
-          }
-          .landing-page .content .info button {
-            border: 0;
-            border-radius: 20px;
-            padding: 12px 30px;
-            margin-top: 30px;
-            cursor: pointer;
-            color: #FFF;
-            background-color: #6c63ff;
-          }
-          .landing-page .content .image img {
-            max-width: 100%;
-          }
-          /* End Landing Page */
+/* Start Landing Page */
+.landing-page header {
+  min-height: 80px;
+  display: flex;
+}
+@media (max-width: 767px) {
+  .landing-page header {
+    min-height: auto;
+    display: initial;
+  }
+}
+.landing-page header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+@media (max-width: 767px) {
+  .landing-page header .container {
+    flex-direction: column;
+    justify-content: center;
+  }
+}
+.landing-page header .logo {
+  color: #5d5d5d;
+  font-style: italic;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+@media (max-width: 767px) {
+  .landing-page header .logo {
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+}
+.landing-page header .links {
+  display: flex;
+  align-items: center;
+}
+@media (max-width: 767px) {
+  .landing-page header .links {
+    text-align: center;
+    gap: 10px;
+  }
+}
+.landing-page header .links li {
+  margin-left: 30px;
+  color: #5d5d5d;
+  cursor: pointer;
+  transition: 0.3s;
+}
+@media (max-width: 767px) {
+  .landing-page header .links li {
+    margin-left: auto;
+  }
+}
+.landing-page header .links li:last-child {
+  border-radius: 20px;
+  padding: 10px 20px;
+  color: #fff;
+  background-color: #6c63ff;
+}
+.landing-page header .links li:not(:last-child):hover {
+  color: #6c63ff;
+}
+.landing-page .content .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 140px;
+  min-height: calc(100vh - 80px);
+}
+@media (max-width: 767px) {
+  .landing-page .content .container {
+    gap: 0;
+    min-height: calc(100vh - 101px);
+    justify-content: center;
+    flex-direction: column-reverse;
+  }
+}
+@media (max-width: 767px) {
+  .landing-page .content .info {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+}
+.landing-page .content .info h1 {
+  color: #5d5d5d;
+  font-size: 44px;
+}
+.landing-page .content .info p {
+  margin: 0;
+  line-height: 1.6;
+  font-size: 15px;
+  color: #5d5d5d;
+}
+.landing-page .content .info button {
+  border: 0;
+  border-radius: 20px;
+  padding: 12px 30px;
+  margin-top: 30px;
+  cursor: pointer;
+  color: #fff;
+  background-color: #6c63ff;
+}
+.landing-page .content .image img {
+  max-width: 100%;
+}
+/* End Landing Page */
 
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
 
-        .header {
-            background-image: url('../img/cityscape.jpg');
-            background-size: cover;
-            background-position: center;
-            color: #fff; /* Changed text color to white */
-            padding: 100px 0;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
+.header {
+  background-image: url("../img/cityscape.jpg");
+  background-size: cover;
+  background-position: center;
+  color: #fff; /* Changed text color to white */
+  padding: 100px 0;
+  text-align: center;
+  backdrop-filter: blur(10px);
+}
 
-        .header h1 {
-            font-size: 48px;
-            margin-bottom: 20px;
-        }
+.header h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
 
-        .header p {
-            font-size: 20px;
-            margin-bottom: 40px;
-        }
+.header p {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
 
-        .features {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-around;
-            background-color: #f8f8f8;
-            padding: 60px 0;
-        }
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  background-color: #f8f8f8;
+  padding: 60px 0;
+}
 
-        .feature {
-            width: 30%;
-            padding: 20px;
-            margin: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added a box shadow */
-        }
+.feature {
+  width: 40%;
+  padding: 20px;
+  margin: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Added a box shadow */
+}
 
-        .feature img {
-            max-width: 100%;
-            height: auto;
-            border-radius: 50%;
-            margin-bottom: 20px;
-        }
+.features .feature:hover {
+  transition: all linear 0.3s;
+  box-shadow: rgb(170, 168, 168);
+  transform: scale(0.9);
+}
 
-        .feature h2 {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
+.feature img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 20px;
+}
 
-        .feature p {
-            font-size: 16px;
-        }
+.feature h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
 
-        .cta {
-            background-color: #6c63ff;
-            padding: 60px 0;
-            color: #fff;
-            text-align: center;
-        }
+.feature p {
+  font-size: 16px;
+}
 
-        .cta h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-        }
+.cta {
+  background-color: #6c63ff;
+  padding: 60px 0;
+  color: #fff;
+  text-align: center;
+}
 
-        .cta p {
-            font-size: 20px;
-            margin-bottom: 40px;
-        }
+.cta h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
 
-        .cta a {
-            padding: 10px 20px;
-            background-color: #fff;
-            color: #6c63ff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-right: 10px;
-        }
-        .about, .benefits, .how-it-works, .testimonial, .join-now {
-            text-align: left;
-            margin: 40px;
-        }
+.cta p {
+  font-size: 20px;
+  margin-bottom: 40px;
+}
 
-        .about h2, .benefits h2, .how-it-works h2, .testimonial h2, .join-now h2 {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
+.cta a {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #6c63ff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-right: 10px;
+}
 
-        .about p, .how-it-works p, .testimonial blockquote p, .join-now p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
+.cta a:hover{
+  color: #fff;
+  background-color: #26217e;
+}
 
-        .benefits ul {
-            list-style-type: disc;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
+.about,
+.benefits,
+.how-it-works,
+.testimonial,
+.join-now {
+  text-align: left;
+  margin: 40px;
+}
 
-        .testimonial blockquote {
-            font-size: 20px;
-            border-left: 4px solid #6c63ff; /* Added a border to the quote */
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
+.about h2,
+.benefits h2,
+.how-it-works h2,
+.testimonial h2,
+.join-now h2 {
+  font-size: 32px;
+  margin-bottom: 10px;
+}
 
-        .testimonial cite {
-            display: block;
-            font-size: 16px;
-            margin-top: 10px;
-        }
+.about p,
+.how-it-works p,
+.testimonial blockquote p,
+.join-now p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 
-        .join-now a {
-            padding: 10px 20px;
-            background-color: #6c63ff;
-            color: #fff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            margin-right: 10px;
-        }
-        .section {
-            margin: 40px;
-            padding: 40px;
-            background-color: #f8f8f8;
-            border-radius: 10px;
-        }
+.benefits ul {
+  list-style-type: disc;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 
-        .section h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
+.testimonial blockquote {
+  font-size: 20px;
+  border-left: 4px solid #6c63ff; /* Added a border to the quote */
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
 
-        .section p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
+.testimonial cite {
+  display: block;
+  font-size: 16px;
+  margin-top: 10px;
+}
 
-        .section ul {
-            list-style-type: disc;
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
+.join-now a {
+  padding: 10px 20px;
+  background-color: #6c63ff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+  margin-right: 10px;
+}
+.section {
+  margin: 40px;
+  padding: 40px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
 
-        .quote {
-            text-align: center;
-            font-size: 20px;
-            margin-bottom: 20px;
-        }
+.section h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
 
-        .quote blockquote {
-            display: inline-block;
-            font-size: 20px;
-            border-left: 4px solid #6c63ff;
-            padding-left: 20px;
-            margin-bottom: 20px;
-        }
+.section p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 
-        .quote cite {
-            display: block;
-            font-size: 18px;
-            margin-top: 10px;
-            font-style: italic;
-        }
-        .stay-notified {
-            background-color: #6c63ff;
-            color: #fff;
-            text-align: center;
-            padding: 60px 0;
-            border-radius: 10px;
-        }
+.section ul {
+  list-style-type: disc;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 
-        .stay-notified h2 {
-            font-size: 32px;
-            margin-bottom: 20px;
-        }
+.quote {
+  text-align: center;
+  font-size: 20px;
+  margin-bottom: 20px;
+}
 
-        .stay-notified p {
-            font-size: 18px;
-            margin-bottom: 20px;
-        }
+.quote blockquote {
+  display: inline-block;
+  font-size: 20px;
+  border-left: 4px solid #6c63ff;
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
 
-        .stay-notified form {
-            max-width: 400px;
-            margin: 0 auto;
-        }
+.quote cite {
+  display: block;
+  font-size: 18px;
+  margin-top: 10px;
+  font-style: italic;
+}
+.stay-notified {
+  background-color: #6c63ff;
+  color: #fff;
+  text-align: center;
+  padding: 60px 0;
+  border-radius: 10px;
+}
 
-        .stay-notified input {
-            width: calc(100% - 20px);
-            padding: 10px;
-            margin-bottom: 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 5px;
-        }
+.stay-notified h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
 
-        .stay-notified button {
-            padding: 10px 20px;
-            background-color: #fff;
-            color: #6c63ff;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 18px;
-            border: none;
-            cursor: pointer;
-        }
-        .benefits {
-            text-align: center;
-            margin: 50px 0;
-        }
-        
-        .benefits h2 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #6c63ff;
-        }
-        
-        .benefits ul {
-            list-style-type: none;
-            text-align: left;
-            margin-left: 30%;
-            padding: 0;
-        }
-        
-        .benefits li {
-            font-size: 18px;
-            margin-bottom: 10px;
-            color: #333;
-        }
-        
-        .benefits li::before {
-            content: "\2022"; /* Bullet character */
-            color: #6c63ff;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
-            font-size: 1.5em;
-        }
-        
+.stay-notified p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
 
+.stay-notified form {
+  max-width: 400px;
+  margin: 0 auto;
+}
 
+.stay-notified input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  margin-bottom: 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+}
+
+.stay-notified button {
+  padding: 10px 20px;
+  background-color: #fff;
+  color: #6c63ff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 18px;
+  border: none;
+  cursor: pointer;
+}
+.benefits {
+  text-align: center;
+  margin: 50px 0;
+}
+
+.benefits h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: #6c63ff;
+}
+
+.benefits ul {
+  list-style-type: none;
+  text-align: left;
+  margin-left: 30%;
+  padding: 0;
+}
+
+.benefits li {
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.benefits li::before {
+  content: "\2022"; /* Bullet character */
+  color: #6c63ff;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+  font-size: 1.5em;
+}
     </style>
+    
 </head>
 <body>
 
@@ -440,22 +462,28 @@
 
     <div class="features">
         <div class="feature">
-            <!-- <img src="residents.jpg" alt="Residents"> -->
+            <img src="residents.jpg" alt="Residents">
             <h2>For Residents</h2>
+            
             <p>Stay updated on events, connect with neighbors, and contribute to shaping our city's future.</p>
+           
         </div>
         <div class="feature">
-            <!-- <img src="workers.jpg" alt="Workers"> -->
-            <h2>For Workers</h2>
+            <img src="workers.jpg" alt="Workers">
+             <h2>For Workers</h2>
             <p>Explore professional opportunities, network with peers, and be an active part of GIFT City's growth.</p>
         </div>
-        <div class="feature">
-            <!-- <img src="businesses.jpg" alt="Businesses"> -->
+        <div class="feature"> 
+             <img src="businesses.jpg" alt="Businesses">
             <h2>For Businesses</h2>
             <p>Promote your services, connect with customers, and be a key player in our local economy.</p>
         </div>
     </div>
+    
+        
+           
 
+     </div>
     <div class="benefits">
         <h2>Benefits of Joining GIFTO</h2>
         <ul>
@@ -470,8 +498,8 @@
     <div class="cta">
         <h2>Join Us in Shaping the Future of GIFT City!</h2>
         <p>Get started now and be a part of the thriving community at GIFT City.</p>
-        <a href="/signup">Sign Up</a>
-        <a href="/login">Login</a>
+        <a class="btn" href="/signup">Sign Up</a>
+        <a class="btn" href="/login">Login</a>
     </div>
 
 

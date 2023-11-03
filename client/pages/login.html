@@ -76,16 +76,6 @@
     </div>
 </body>
 <script>
-    const urlParams = new URLSearchParams(window.location.search);
-    const token = urlParams.get('token');
-
-
-    
-    function loadHomePage() {
-        // Load the /home endpoint
-        redirect('/home')
-    }
-
     document.querySelector('.loginForm').addEventListener('submit', function(event) {
         event.preventDefault(); 
         
@@ -110,7 +100,7 @@
             console.log(res.status);
             if(res.status==200){
                 window.alert('Login successful!');
-                const token = localStorage.getItem('jwtToken');
+                //localStorage.setItem('token', data.token);
                 window.location.href = 'http://localhost:3000/home'
             }
             return res.json();

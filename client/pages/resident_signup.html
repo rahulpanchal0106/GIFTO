@@ -125,15 +125,34 @@
                     window.alert('User already exists');
                 }else if(res.status==201){
                     window.alert('Registration Successful');
+                    window.location.href='http://localhost:3000/home';
                     
                 }else{
                     window.alert('Something went wrong');
                 }
                 return res.json();
             })
-            .then((data) => {
-                console.log('Data sent successfully:',data);
-                const token = data.token;
+            .then(data => {
+                console.log('Data sent successfully:', data);
+                fetch('/home',{
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'auth':`Bearer ${token}`
+                        },
+                        method:'GET'
+                    })
+                    .then((res)=>{
+                        return res.text();
+                    })
+                    .then((data)=>{
+                        console.log(data);
+                        document.getElementById('body').innerHTML=data;
+                    })
+            })
+            //.then((data) => {
+            //    console.log('Data sent successfully:',data);
+            //    const token = data.token;
+                
                 //window.location.href='http://localhost:3000/home'
                 //localStorage.setItem('jwtToken', token);
                 //fetch('/home',{
@@ -150,7 +169,7 @@
                 //    console.log(data);
                 //    document.getElementById('body').innerHTML=data;
                 //})
-            })
+            //})
             .catch(error => {
                 console.error('Error sending data:', error);
             });
