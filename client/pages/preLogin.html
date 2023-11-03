@@ -10,12 +10,18 @@
 
 * {
   box-sizing: border-box;
+  scroll-behavior: smooth;
+
+}
+html {
+  scroll-behavior: smooth;
 }
 body {
   font-family: "Open Sans", sans-serif;
 }
 a {
   text-decoration: none;
+  color:white
 }
 ul {
   list-style: none;
@@ -440,7 +446,7 @@ body {
                 <ul class="links">
                   <li>Home</li>
                   <li>About Us</li>
-                  <li>Get Started</li>
+                  <li><a href="#cta">Get Started</a></li>
                 </ul>
               </div>
             </header>
@@ -450,7 +456,7 @@ body {
                 <div class="info">
                   <h1>Welcome to GIFTO</h1>
                   <p>GIFTO is a community engagement platform designed to foster connections and empower individuals and businesses in GIFT City. Our mission is to create a thriving, inclusive, and forward-thinking community.</p>
-                  <button>Get Started</button>
+                    <a href="#cta"><button>Get Started</button></a>
                 </div>
                 <div class="image">
                   <img src="https://i.postimg.cc/65QxYYzh/001234.png">
@@ -495,7 +501,7 @@ body {
     </div>
 
 
-    <div class="cta">
+    <div class="cta" id="cta" name="cta">
         <h2>Join Us in Shaping the Future of GIFT City!</h2>
         <p>Get started now and be a part of the thriving community at GIFT City.</p>
         <a class="btn" href="/signup">Sign Up</a>

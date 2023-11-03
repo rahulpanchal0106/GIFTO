@@ -32,13 +32,18 @@
             align-items: start;
             justify-content: center;
         }
-
+        
+        .event-list::-webkit-scrollbar{
+          display: none;
+        }
         .event-list {
             flex: 1;
             text-align: left;
-            padding-right: 20px;
+            padding-right: 30px;
             width:30vw;
             padding-left: 20px;
+            overflow: scroll;  
+            max-height: 83vh;  
         }
 
         .event-item {
@@ -62,7 +67,7 @@
 
         .map-section {
             flex: auto;
-            height: 85vh; /* Adjust height as needed */
+            height: 83vh; /* Adjust height as needed */
             background-color: #ccc; /* Placeholder color for map */
             border-radius: 5px;
             box-shadow: #66666666 0px 0px 30px;
@@ -74,9 +79,9 @@
             margin-top: 20px;
         }
 
-        .button {
+        .event-list .button {
             padding: 10px 20px;
-            background-color: #007bff;
+            background-color: #6c63ff;
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -84,7 +89,9 @@
             text-decoration: none;
             font-size: 16px;
             margin-right: 10px;
+            margin-bottom: 10px;
         }
+
         a {
             text-decoration: none;
           }
@@ -232,6 +239,33 @@
         #addressField{
           padding: 5px;
         }
+        .form-group input {
+          width: 100%;
+          padding: 10px;
+          border: 1px solid #ccc;
+          border-radius: 5px;
+      }
+
+      .form-group button {
+          padding: 10px 20px;
+          background-color: #6c63ff;
+          color: #fff;
+          border: none;
+          border-radius: 5px;
+          cursor: pointer;
+      }
+      .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-group label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
+    #eventDetailsForm{
+      display: none;
+    }
     </style>
 </head>
 <body>
@@ -249,6 +283,30 @@
     </div>
     <div class="content">
         <div class="event-list">
+          <button id="createEventButton" class="button">Create Event</button>
+          <form action="" method="post" id="eventDetailsForm">
+              <div class="form-group">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" name="eventName" required>
+              </div>
+              <div class="form-group">
+                  <label for="eventDate">Event Date:</label>
+                  <input type="date" id="eventDate" name="date" required>
+              </div>
+              <div class="form-group">
+                  <label for="eventTime">Event Time:</label>
+                  <input type="time" id="eventTime" name="time" required>
+              </div>
+              <div class="form-group">
+                <label for="address">Address:</label>
+                <textarea id="address" name="address" rows="4" required></textarea>
+              </div>
+              <div class="form-group">
+                  <label for="details">Event Details:</label>
+                  <textarea id="address" name="address" rows="4" required></textarea>
+              </div>
+
+          </form>
             <div class="event-item">
                 <div class="event-title">Event 1</div>
                 <div class="event-details">Date: [Event Date]</div>
@@ -259,11 +317,11 @@
                 <div class="event-details">Date: [Event Date]</div>
                 <div class="event-details">Location: [Event Location]</div>
             </div>
-            <!-- Add more event items as needed -->
         </div>
         <div class="map-section">
             <div id="map" style="width: 100%; height: 100%; border-radius:6px; margin-right:100px"></div>
-            <button id="createEventButton">Create Event</button>
+            
+            
         </div>
     </div>
 </body>
@@ -287,12 +345,8 @@
     var marker=0;
     
     
-    
 
-    // Make a request to Nominatim geocoding service
     var address = "WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India ";
-    var addressFromAPI = '';
-    // Make a request to Nominatim geocoding service
     fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
       .then(response => response.json())
       .then(data => {
@@ -305,20 +359,24 @@
           const markdown=`
             <b>Event details<b>
               <br>
-              <div id="addressField"></div>
-              <button href='/eveDetails'>Show Event Details</button>
+              <div id="addressField">${address}</div>
+              <button id="event_details">Show Event Details</button>
             `
-          marker.bindPopup(markdown).openPopup();
+          marker.bindPopup(markdown);
           function getLocation(){
             fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
               .then((res) => {
-                res.json()
+                return res.json()
               })
               .then(data => {
                 if (data && data.display_name) {
                   console.log(data.display_name);
                   addressFromAPI = data.display_name;
-      
+                  
+                  const title = 'Event Title 🫠'; 
+                  const date = 'Event Date booo';  
+                  addEventToList(title, date, addressFromAPI);
+
                 } else {
                   console.error('Invalid response data');
               } 
@@ -329,17 +387,28 @@
         } else {
           console.error('No results found');
           marker = L.marker([23.163550800000003,72.68785923316112]).addTo(map);
-          marker.bindPopup(`<b>GIFT City</b><br>Welcome!<br> Nanimo`).openPopup();
+          marker.bindPopup(`<b>GIFT City</b><br>Welcome!`).openPopup();
         }
       })
       .catch(error => console.error('Error:', error));
 
-      addressField = document.getElementById('addressField');
-      addressField.innerHTML=addressFromAPI;
 
-
-
-
+      function addEventToList(title, date, location) {
+        const eventList = document.querySelector('.event-list');
+        const eventItem = document.createElement('div');
+        eventItem.classList.add('event-item');
+        eventItem.innerHTML = `
+          <div class="event-title"><b>${title}</b></div>
+          <div class="event-details"><b>Date:</b> ${date}</div>
+          <div class="event-details"><b>Location:</b> ${location}</div>
+        `;
+        eventList.appendChild(eventItem);
+      }
+      
+      document.getElementById('createEventButton').addEventListener('click',(event)=>{
+        event.preventDefault();
+        document.getElementById('eventDetailsForm').style.display='flex';
+      })
 
 
       
