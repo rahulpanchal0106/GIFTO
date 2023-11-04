@@ -33,16 +33,32 @@
             justify-content: center;
         }
         .event-list::-webkit-scrollbar{
-          display: none;
+          width: 10px;
         }
+        .event-list::-webkit-scrollbar-thumb{
+          background-color: #6b63ff6d;
+          border-radius: 20px;
+        }
+
         .event-list {
             flex: 1;
+            display: flex;
+            flex-direction: column;
             text-align: left;
-            padding-right: 30px;
+            padding-right: 00px;
+            margin-right: 60px;
             width:30vw;
             padding-left: 20px;
-            overflow: scroll;  
+            overflow-y: scroll; 
+            overflow-x:hidden; 
             max-height: 83vh;  
+            padding-top: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .event-list-inside{
+          display: flex;
+          flex-direction: column-reverse;
         }
 
         .event-item {
@@ -78,7 +94,7 @@
         .button-container {
             margin-top: 20px;
         }
-
+        
         .event-list .button {
             padding: 10px 20px;
             background-color: #6c63ff;
@@ -90,6 +106,8 @@
             font-size: 16px;
             margin-right: 10px;
             margin-bottom: 10px;
+            position: sticky;
+            top: 0px;
         }
 
         a {
@@ -234,6 +252,9 @@
                 margin-top: 20px;
                 margin-bottom: 20px;
             }
+            #eventDetailsForm{
+              top:200px;
+            }
         }
            
         #addressField{
@@ -266,6 +287,9 @@
     #eventDetailsForm::-webkit-scrollbar{
       display: none;
     }
+    #createEventButton:active{
+      background-color: #423d9b;
+    }
     #eventDetailsForm{
       display: none;
       position: absolute;
@@ -279,7 +303,58 @@
       box-shadow: #66666666 0px 0px 30px;
       border-radius: 10px;
       z-index: 30;
+      top: 150px;
     }
+    #close{
+      padding:10px;
+      color:white;
+      background-color: red;
+      border: none;
+      border-radius: 50%;
+      float: right;
+    }
+    .delete-event-btn{
+      padding:10px;
+      width:50px;
+      height: 17px;
+      background-color: #6c63ff;
+      border-radius: 6px;
+      display: flex;
+      color: white;
+      align-items: center;
+      justify-content: center;
+      border: none;
+      cursor: pointer;
+      margin: 3px;
+      margin-top: 6px;
+    }
+    .delete-event-btn:active{
+      background-color: #423d9b;
+    }
+
+    .footer {
+      background-color: #6b63ff00;
+      color: #333;
+      text-align: center;
+      padding: 5px 0px;
+
+      padding-bottom: 20px;
+      bottom: 0;
+      width: 100%;
+      margin-top: 30px;
+      
+  }
+  
+  .footer p {
+      margin: 0;
+  }
+  
+  @media (max-width: 767px) {
+      .footer {
+          font-size: 14px;
+      }
+  }
+  
     </style>
 </head>
 <body>
@@ -324,6 +399,9 @@
               </div>
 
           </form>
+          <div class="event-list-inside">
+
+          </div>
             <!-- <div class="event-item">
                 <div class="event-title">Event 1</div>
                 <div class="event-details">Date: [Event Date]</div>
@@ -341,8 +419,24 @@
             
         </div>
     </div>
+
+    <footer class="footer">
+      <div class="container">
+          <p>&copy; 2023 GIFTO. All Rights Reserved.</p>
+      </div>
+  </footer>
 </body>
 <script>
+
+      document.getElementById('eventDate').addEventListener('input', function() {
+        var selectedDate = new Date(this.value);
+        var today = new Date();
+        if (selectedDate < today) {
+            alert('Please select a date in the future');
+            this.value = '';
+        }
+    });
+
 
     var southWest = L.latLng(23.145, 72.660);
     var northEast = L.latLng(23.185, 72.705); 
@@ -362,24 +456,25 @@
     var marker=0;
     
     
-
+    
     //var address = "WTC Tower-B, B, GIFT City Road, GIFT City, Gandhinagar Taluka, Gandhinagar District, Gujarat, 382355, India ";
 
 
-      function addEventToList(title, date, location) {
-        const eventList = document.querySelector('.event-list');
+      function addEventToList(title, date, location,details) {
+        const eventList = document.querySelector('.event-list-inside');
         const eventItem = document.createElement('div');
         eventItem.classList.add('event-item');
         eventItem.innerHTML = `
           <div class="event-title"><b>${title}</b></div>
           <div class="event-details"><b>Date:</b> ${date}</div>
           <div class="event-details"><b>Location:</b> ${location}</div>
+          <div class="details-drop"><b>Details:</b> ${details}</div>
         `;
         eventList.appendChild(eventItem);
       }
       
       document.getElementById('createEventButton').addEventListener('click', function() {
-    
+        
         var form = document.getElementById('eventDetailsForm');
         if (form.style.display === 'none') {
           form.style.display = 'block';
@@ -408,6 +503,7 @@
         })
         .then((res)=>{
           console.log("🛸🛸",res.status);
+          
           return res.json();
         })
         .then((data)=>{
@@ -432,10 +528,12 @@
             console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
             marker = L.marker([latitude, longitude]).addTo(map);
             const markdown=`
-            <b>${title}</b><br>
-            Date: ${date}<br>
-            Address: ${address}
+            <b>${eventData.eventName}</b><br>
+            Date: ${eventData.eventDate}<br>
+            Address: ${eventData.address}<br>
+            Details:${eventData.details}
           `;
+          console.log(`EventName:${eventName.eventName}`);
             marker.bindPopup(markdown);
             function getLocation(){
               fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${latitude}&lon=${longitude}`)
@@ -450,7 +548,7 @@
                     const title = eventData.eventName; 
                     const date = eventData.eventDate;  
                     addEventToList(title, date, addressFromAPI);
-  
+                    document.getElementById('eventDetailsForm').style.display='none';
                   } else {
                     console.error('Invalid response data');
                 } 
@@ -484,7 +582,8 @@
             const title = event.eventName;
             const date = event.eventDate;
             const address = event.address;
-            addEventToList(title, date, address);
+            const details = event.details;
+            addEventToList(title, date, address,details);
           });
           
           if (eventData.events.length === 0) {
@@ -494,7 +593,7 @@
             eventList.appendChild(noEventsMessage);
           }
           eventData.markers.forEach(markerData => {
-            const { title, date, address, latitude, longitude } = markerData;
+            const { title, date, address, details,latitude, longitude } = markerData;
       
             const marker = L.marker([latitude, longitude]).addTo(map);
       
@@ -513,6 +612,8 @@
       
       document.addEventListener('DOMContentLoaded', loadEvents);
       
+
+
       
       
 </script>

@@ -54,24 +54,24 @@
     <h2>Professional Signup</h2>
     <form class="signup-form" action="#" method="post" enctype="multipart/form-data">
         <div class="form-group">
-            <label for="fullname">Full Name:</label>
+            <label for="fullname">Full Name: *</label>
             <input type="text" id="fullname" name="fullName" required>
         </div>
         <div class="form-group">
-            <label for="mobile">Mobile Number:</label>
+            <label for="mobile">Mobile Number: *</label>
             <input type="tel" id="mobile" name="mobile" required>
         </div>
         <div class="form-group">
-            <label for="email">Email:</label>
+            <label for="email">Email: *</label>
             <input type="email" id="email" name="email" required>
         </div>
         <div class="form-group">
-            <label for="password">Password:</label>
+            <label for="password">Password: *</label>
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
             <label for="company">Company Name:</label>
-            <input type="text" id="company" name="company" required>
+            <input type="text" id="company" name="company" required >
         </div>
         <div class="form-group" id="suAs">
             <label for="signUp_as">SignUp as:</label>
@@ -113,7 +113,7 @@
                 window.alert('User already exists');
             }else if(res.status==201){
                 window.alert('registered successfull');
-                window.location.href='http://localhost:3000/home';
+                window.location.href='http://localhost:3000/login';
             }else{
                 return window.alert('Something went wrong');
             }
