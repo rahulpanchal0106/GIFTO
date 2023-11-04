@@ -55,7 +55,8 @@
     <form class="signup-form" action="#" method="post" enctype="multipart/form-data">
         <div class="form-group">
             <label for="fullname">Full Name: *</label>
-            <input type="text" id="fullname" name="fullName" required>
+            <input type="text" id="fullname" name="fullName" pattern="[A-Za-z\s]+" required>
+            <small>Only UpperCase, LowerCase letters and whitespace characters are allowed</small>
         </div>
         <div class="form-group">
             <label for="mobile">Mobile Number: *</label>
@@ -70,8 +71,9 @@
             <input type="password" id="password" name="password" required>
         </div>
         <div class="form-group">
-            <label for="company">Company Name:</label>
-            <input type="text" id="company" name="company" required >
+            <label for="company">Company Name: *</label>
+            <input type="text" id="company" name="company"  pattern=".*\S+.*" required >
+            <small>company name should not be empty</small>
         </div>
         <div class="form-group" id="suAs">
             <label for="signUp_as">SignUp as:</label>
@@ -91,6 +93,8 @@
     document.querySelector('.signup-form').addEventListener('submit', function(event) {
         event.preventDefault(); 
         
+
+
         // Get form data
         const formData = new FormData(this);
         const postData = {};
@@ -112,10 +116,10 @@
             if(res.status==400){
                 window.alert('User already exists');
             }else if(res.status==201){
-                window.alert('registered successfull');
+                window.alert('registered successfully');
                 window.location.href='http://localhost:3000/login';
             }else{
-                return window.alert('Something went wrong');
+                return window.alert('Please enter a valid mobile number');
             }
             res.json()
         })

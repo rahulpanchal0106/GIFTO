@@ -3,7 +3,6 @@ const userModel = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-
 const SECRET_KEY = process.env.SECRET_KEY;
 function signupPage(req,res){
     const page = path.join(__dirname,'..','..','client','pages','signup.html');
