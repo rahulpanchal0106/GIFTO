@@ -10,7 +10,7 @@ GIFTO is a community engagement platform designed to connect residents and worke
 - **Frontend**: HTML, CSS, JavaScript
 - **Backend**: Node.js, Express.js
 - **Database**: MongoDB 
-- **Mapping**: Leaflet.js, Nominatin Geocoding Services
+- **Mapping**: Leaflet.js, Nominatim Geocoding Services
 - **Authentication**: JWT (JSON Web Tokens)
 
 ## Setup
